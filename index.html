@@ -464,7 +464,7 @@ har &lt;- read.csv(datafile, stringsAsFactors = FALSE)</code></pre>
 <pre class="r"><code>nums &lt;- sapply(har, is.numeric)
 nums[length(nums)] &lt;- TRUE     #We want to leave the 'classe' variable in the set
 har &lt;- har[,nums]</code></pre>
-<p>Then we see that many variables with 19216 NA’s out of 19622 observations, futhermore it appears that these variables are aggregates. We’ra gonna remove these as well:</p>
+<p>Then we see that many variables with 19216 NA’s out of 19622 observations, futhermore it appears that these variables are aggregates. We’re gonna remove these as well:</p>
 <pre class="r"><code>har &lt;- har[,colSums(is.na(har))==0]</code></pre>
 <p>Finally we’ll turn the outcome variable into a factor:</p>
 <pre class="r"><code>har$classe &lt;- as.factor(har$classe)</code></pre>

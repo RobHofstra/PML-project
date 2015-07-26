@@ -39,7 +39,7 @@ nums[length(nums)] <- TRUE     #We want to leave the 'classe' variable in the se
 har <- har[,nums]
 ```
 
-Then we see that many variables with 19216 NA's out of 19622 observations, futhermore it appears that these variables are aggregates. We'ra gonna remove these as well:
+Then we see that many variables with 19216 NA's out of 19622 observations, futhermore it appears that these variables are aggregates. We're gonna remove these as well:
 
 ```{r cleaning4, cache=TRUE}
 har <- har[,colSums(is.na(har))==0]
