@@ -464,9 +464,9 @@ har &lt;- read.csv(datafile, stringsAsFactors = FALSE)</code></pre>
 <pre class="r"><code>nums &lt;- sapply(har, is.numeric)
 nums[length(nums)] &lt;- TRUE     #We want to leave the 'classe' variable in the set
 har &lt;- har[,nums]</code></pre>
-<p>Then we see that many variables with 19216 NA’s out of 19622 observations, futhermore it appears that these variables are aggregates. We’re gonna remove these as well:</p>
+<p>Then we see, that there are many variables with 19216 NA’s out of 19622 observations (e.g. ‘max_roll_belt’).<br />Furthermore, these variables appear to be aggregates. We’re gonna remove these as well:</p>
 <pre class="r"><code>har &lt;- har[,colSums(is.na(har))==0]</code></pre>
-<p>Finally we’ll turn the outcome variable into a factor:</p>
+<p>Finally, we’ll turn the outcome variable into a factor:</p>
 <pre class="r"><code>har$classe &lt;- as.factor(har$classe)</code></pre>
 </div>
 <div id="splitting-the-data" class="section level3">
@@ -486,7 +486,7 @@ cl &lt;- makeCluster(detectCores())
 registerDoParallel(cl)
 fit &lt;- train(classe ~ ., method = 'rf', preProcess = 'pca', data = training)
 stopCluster(cl)</code></pre>
-<p>Let’s see how well it predicts on the training set:</p>
+<p>Let’s see, how well it predicts on the training set:</p>
 <pre class="r"><code>trPred &lt;- predict(fit)
 confusionMatrix(trPred,training$classe)</code></pre>
 <pre><code>## Confusion Matrix and Statistics
@@ -520,7 +520,7 @@ confusionMatrix(trPred,training$classe)</code></pre>
 ## Detection Rate         0.2843   0.1935   0.1744   0.1639   0.1839
 ## Detection Prevalence   0.2843   0.1935   0.1744   0.1639   0.1839
 ## Balanced Accuracy      1.0000   1.0000   1.0000   1.0000   1.0000</code></pre>
-<p>This gives a very high accuracy indeed, but we know that it will overfit on the training set, so let’s see how well it does on the testing set:</p>
+<p>This gives a very high accuracy indeed, but we know that it will overfit on the training set, so let’s see, how well it does on the testing set:</p>
 <pre class="r"><code>tstPred &lt;- predict(fit, newdata = testing)
 confusionMatrix(tstPred,testing$classe)</code></pre>
 <pre><code>## Confusion Matrix and Statistics
@@ -557,7 +557,7 @@ confusionMatrix(tstPred,testing$classe)</code></pre>
 </div>
 <div id="results" class="section level3">
 <h3>Results</h3>
-<p>As expected the accuracy on the testing set is a little lower, but with 97% still very good. Which means we have an out of sample error of 1 - 0,9669 = 0,0331 or just over 3%.</p>
+<p>As expected, the accuracy on the testing set is a little lower, but with 97% still very good.<br />Which means we have an out of sample error of 1 - 0,9669 = 0,0331 or just over 3%.</p>
 </div>
 
 

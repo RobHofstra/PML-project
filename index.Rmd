@@ -39,13 +39,14 @@ nums[length(nums)] <- TRUE     #We want to leave the 'classe' variable in the se
 har <- har[,nums]
 ```
 
-Then we see that many variables with 19216 NA's out of 19622 observations, futhermore it appears that these variables are aggregates. We're gonna remove these as well:
+Then we see, that there are many variables with 19216 NA's out of 19622 observations (e.g. 'max_roll_belt').  
+Furthermore, these variables appear to be aggregates. We're gonna remove these as well:
 
 ```{r cleaning4, cache=TRUE}
 har <- har[,colSums(is.na(har))==0]
 ```
 
-Finally we'll turn the outcome variable into a factor:
+Finally, we'll turn the outcome variable into a factor:
 
 ```{r cleaning5, cache=TRUE}
 har$classe <- as.factor(har$classe)
@@ -73,14 +74,14 @@ fit <- train(classe ~ ., method = 'rf', preProcess = 'pca', data = training)
 stopCluster(cl)
 ```
 
-Let's see how well it predicts on the training set:
+Let's see, how well it predicts on the training set:
 
 ```{r fitting2, cache=TRUE}
 trPred <- predict(fit)
 confusionMatrix(trPred,training$classe)
 ```
 
-This gives a very high accuracy indeed, but we know that it will overfit on the training set, so let's see how well it does on the testing set:
+This gives a very high accuracy indeed, but we know that it will overfit on the training set, so let's see, how well it does on the testing set:
 
 ```{r fitting3, cache=TRUE}
 tstPred <- predict(fit, newdata = testing)
@@ -88,5 +89,5 @@ confusionMatrix(tstPred,testing$classe)
 ```
 
 ###Results
-As expected the accuracy on the testing set is a little lower, but with 97% still very good.
+As expected, the accuracy on the testing set is a little lower, but with 97% still very good.  
 Which means we have an out of sample error of 1 - 0,9669 = 0,0331 or just over 3%.
